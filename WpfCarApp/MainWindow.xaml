@@ -1,0 +1,131 @@
+﻿<Window x:Class="WpfCarApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfCarApp"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="650" Width="1230" WindowStartupLocation="CenterScreen" MinHeight="650" MaxHeight="1230">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="0.6*"/>
+            <RowDefinition Height="6*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" Background="#F92630">
+            <Canvas>
+                <Label FontSize="25" FontWeight="Bold" Content="CAR.AZ" Foreground="White" Canvas.Left="200" Canvas.Top="10"></Label>
+                <Label FontSize="20" FontWeight="Medium" Content="Bütün elanlar" Foreground="White" Canvas.Left="320" Canvas.Top="15"></Label>
+                <Label FontSize="20" FontWeight="Medium" Content="Salonlar" Foreground="White" Canvas.Left="460" Canvas.Top="15"></Label>
+                <Label FontSize="20" FontWeight="Medium" Content="Moto" Foreground="White" Canvas.Left="550" Canvas.Top="15"></Label>
+                <Label FontSize="20" FontWeight="Medium" Content="Ehtiyat hisseleri ve aksesuarlar" Foreground="White" Canvas.Left="620" Canvas.Top="15"></Label>
+                <Label FontSize="20" FontWeight="Medium" Content="Icare" Foreground="White" Canvas.Left="900" Canvas.Top="15"></Label>
+                
+            </Canvas>
+        </Grid>
+        <WrapPanel Grid.Row="1" Background="SlateBlue">
+            <Label Foreground="White" Width="210" Height="40" FontSize="17" FontWeight="Medium" Margin="0,20,0,0" Content="Marka və Model" HorizontalContentAlignment="Center"></Label>
+            <Label Foreground="White" Width="130" Height="40" FontSize="17" FontWeight="Medium" Margin="0,20,0,0" Content="Yanacaq" HorizontalContentAlignment="Center"></Label>
+            <Label Foreground="White" Width="130" Height="40" FontSize="17" FontWeight="Medium" Margin="0,20,0,0" Content="Rəng" HorizontalContentAlignment="Center"></Label>
+            <Label Foreground="White" Width="130" Height="40" FontSize="17" FontWeight="Medium" Margin="0,20,0,0" Content="Ban Novü" HorizontalContentAlignment="Center"></Label>
+            <Label Foreground="White" Width="130" Height="40" FontSize="17" FontWeight="Medium" Margin="0,20,0,0" Content="Buraxilis ili" HorizontalContentAlignment="Center"></Label>
+            <Label Foreground="White" Width="130" Height="40" FontSize="17" FontWeight="Medium" Margin="0,20,0,0" Content="Yeni" HorizontalContentAlignment="Center"></Label>
+            <Label Foreground="White" Width="130" Height="40" FontSize="17" FontWeight="Medium" Margin="0,20,0,0" Content="Yürüs" HorizontalContentAlignment="Center"></Label>
+            <Label Foreground="White" Width="100" Height="40" FontSize="17" FontWeight="Medium" Margin="0,20,0,0" Content="min" HorizontalContentAlignment="Center"></Label>
+            <Label Foreground="White" Width="100" Height="40" FontSize="17" FontWeight="Medium" Margin="12,20,0,0" Content="max" HorizontalContentAlignment="Center"></Label>
+        </WrapPanel>
+        <WrapPanel Grid.Row="2">
+            <ComboBox Name="brandInfo" Width="210" Height="40" FontSize="17" FontWeight="Bold" 
+                      ItemsSource="{Binding Brands}"
+                      DisplayMemberPath="BrandName"
+                      SelectedValuePath="BrandID"
+                      SelectedItem="SelectedBrand">
+            </ComboBox>
+
+            <ComboBox Name="petrolInfo" Width="130" Height="40" FontSize="17" FontWeight="Bold"
+                      ItemsSource="{Binding PetrolTypes}"
+                      DisplayMemberPath="PetrolTypeName"
+                      SelectedValuePath="PetrolTypeID"
+                      SelectedItem="SelectedPetrolType">
+            </ComboBox>
+
+            <ComboBox Name="colorInfo" Width="130" Height="40" FontSize="17" FontWeight="Bold"
+                      ItemsSource="{Binding Colors}"
+                      DisplayMemberPath="ColorName"
+                      SelectedValuePath="ColorID"
+                      SelectedItem="SelectedColor">    
+            </ComboBox>
+
+            <ComboBox Name="banInfo" Width="130" Height="40" FontSize="17" FontWeight="Bold"
+                      ItemsSource="{Binding BanNovus}"
+                      DisplayMemberPath="BanNovuName"
+                      SelectedValuePath="BanNovuID"
+                      SelectedItem="SelectedBanNovu">
+            </ComboBox>
+
+            <ComboBox Name="buraxilisInfo" Width="130" Height="40" FontSize="17" FontWeight="Bold"
+                ItemsSource="{Binding BuraxilisIlis}"
+                SelectedItem="{Binding SelectedBuraxilisIli}">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding BuraxilisIliID}" />
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+
+            <ComboBox Name="newOrOldInfo" Width="130" Height="40" FontSize="17" FontWeight="Bold"
+                ItemsSource="{Binding NewOrOlds}"
+                SelectedItem="SelectedNewOrOld">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Status}" />
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+
+            <ComboBox Name="yurusInfo" Width="130" Height="40" FontSize="17" FontWeight="Bold"
+                ItemsSource="{Binding Yuruses}"
+                SelectedItem="SelectedYurus">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding YurusID}" />
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+            
+            
+            <TextBox Name="minPriceTextBox" Width="100" Height="30" FontSize="15" FontWeight="Bold"
+                 Text="{Binding MinPrice, UpdateSourceTrigger=PropertyChanged}"
+                 HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                 Margin="5"/>
+
+            <TextBox Name="maxPriceTextBox" Width="100" Height="30" FontSize="15" FontWeight="Bold"
+                 Text="{Binding MaxPrice, UpdateSourceTrigger=PropertyChanged}"
+                 HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                 Margin="5"/>
+        </WrapPanel>
+
+        <Canvas Grid.Row="3">
+            <Label Canvas.Left="400" Canvas.Top="60" Width="150" HorizontalContentAlignment="Center" Height="35" Content="Marka ve Model" FontSize="17" FontWeight="Medium" Foreground="White" Background="SlateBlue"></Label>
+            <Label Canvas.Left="400" Canvas.Top="100" Width="150" HorizontalContentAlignment="Center" Height="35" Content="Yanacaq" FontSize="17" FontWeight="Medium" Foreground="White" Background="SlateBlue"></Label>
+            <Label Canvas.Left="400" Canvas.Top="140" Width="150" HorizontalContentAlignment="Center" Height="35" Content="Rəng" FontSize="17" FontWeight="Medium" Foreground="White" Background="SlateBlue"></Label>
+            <Label Canvas.Left="400" Canvas.Top="180" Width="150" HorizontalContentAlignment="Center" Height="35" Content="Ban Novu" FontSize="17" FontWeight="Medium" Foreground="White" Background="SlateBlue"></Label>
+            <Label Canvas.Left="400" Canvas.Top="220" Width="150" HorizontalContentAlignment="Center" Height="35" Content="Buraxilis ili" FontSize="17" FontWeight="Medium" Foreground="White" Background="SlateBlue"></Label>
+            <Label Canvas.Left="400" Canvas.Top="260" Width="150" HorizontalContentAlignment="Center" Height="35" Content="Yeni" FontSize="17" FontWeight="Medium" Foreground="White" Background="SlateBlue"></Label>
+            <Label Canvas.Left="400" Canvas.Top="300" Width="150" HorizontalContentAlignment="Center" Height="35" Content="Yurus" FontSize="17" FontWeight="Medium" Foreground="White" Background="SlateBlue"></Label>
+            <Label Canvas.Left="400" Canvas.Top="340" Width="150" HorizontalContentAlignment="Center" Height="35" Content="min" FontSize="17" FontWeight="Medium" Foreground="White" Background="SlateBlue"></Label>
+            <Label Canvas.Left="400" Canvas.Top="380" Width="150" HorizontalContentAlignment="Center" Height="35" Content="max" FontSize="17" FontWeight="Medium" Foreground="White" Background="SlateBlue"></Label>
+            <Button Name="CarInfo" Click="CarInfo_Click" Margin="0,10,0,0" Width="150" Height="40" Canvas.Left="550" Background="SlateBlue" Content="Göstər" FontSize="20" FontWeight="Bold" Foreground="White"></Button>
+            <Label Name="brandlbl" Width="250" Height="35" FontSize="17" FontWeight="Bold" Canvas.Top="60" Canvas.Left="570" Background="LightGray"></Label>
+            <Label Name="petrollbl" Width="250" Height="35" FontSize="17" FontWeight="Bold" Canvas.Top="100" Canvas.Left="570" Background="LightGray"></Label>
+            <Label Name="colorlbl" Width="250" Height="35" FontSize="17" FontWeight="Bold" Canvas.Top="140" Canvas.Left="570" Background="LightGray"></Label>
+            <Label Name="banlbl" Width="250" Height="35" FontSize="17" FontWeight="Bold" Canvas.Top="180" Canvas.Left="570" Background="LightGray"></Label>
+            <Label Name="buraxilislbl" Width="250" Height="35" FontSize="17" FontWeight="Bold" Canvas.Top="220" Canvas.Left="570" Background="LightGray"></Label>
+            <Label Name="newoldlbl" Width="250" Height="35" FontSize="17" FontWeight="Bold" Canvas.Top="260" Canvas.Left="570" Background="LightGray"></Label>
+            <Label Name="yuruslbl" Width="250" Height="35" FontSize="17" FontWeight="Bold" Canvas.Top="300" Canvas.Left="570" Background="LightGray"></Label>
+            <Label Name="priceminlbl" Width="250" Height="35" FontSize="17" FontWeight="Bold" Canvas.Top="340" Canvas.Left="570" Background="LightGray"></Label>
+            <Label Name="pricemaxlbl" Width="250" Height="35" FontSize="17" FontWeight="Bold" Canvas.Top="380" Canvas.Left="570" Background="LightGray"></Label>
+        </Canvas>
+    </Grid>
+</Window>
